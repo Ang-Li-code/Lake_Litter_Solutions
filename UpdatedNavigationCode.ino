@@ -15,7 +15,8 @@
 // Required Libraries
 #include <Servo.h>
 #include <Adafruit_GPS.h>
-
+#include <Wire.h>
+#include <SparkFun_MMC5983MA_Arduino_Library.h>
 // what's the name of the hardware serial port?
 #define GPSSerial Serial1
 
