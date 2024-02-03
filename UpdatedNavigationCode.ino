@@ -341,3 +341,40 @@ bool checkInsideGeofence(float lat, float lon) {
   double distance = calculateDistance(initLatitude, initLongitude, lat, lon);
   return (distance <= geofenceRadius);
 }
+
+double getHeading(){
+  
+    uint32_t rawValueX = 0;
+    uint32_t rawValueY = 0;
+    uint32_t rawValueZ = 0;
+    double scaledX = 0;
+    double scaledY = 0;
+    double scaledZ = 0;
+    double heading = 0;
+
+    // Read all three channels simultaneously
+    myMag.getMeasurementXYZ(&rawValueX, &rawValueY, &rawValueZ);
+
+    // The magnetic field values are 18-bit unsigned. The _approximate_ zero (mid) point is 2^17 (131072).
+    // Here we scale each field to +/- 1.0 to make it easier to calculate an approximate heading.
+   
+    scaledX = (double)rawValueX - 131072.0;
+    scaledX /= 131072.0;
+
+    scaledY = (double)rawValueY - 131072.0;
+    scaledY /= 131072.0;
+
+    scaledZ = (double)rawValueZ - 131072.0;
+    scaledZ /= 131072.0;
+
+    // Magnetic north is oriented with the Y axis
+    // Convert the X and Y fields into heading using atan2 (Arc Tangent 2)
+    heading = atan2(scaledX, 0 - scaledY);
+
+    // atan2 returns a value between +PI and -PI
+    // Convert to degrees
+    heading /= PI;
+    heading *= 180;
+
+    return heading;
+}
