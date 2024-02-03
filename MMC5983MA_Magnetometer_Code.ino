@@ -34,6 +34,13 @@ void loop()
 }
 
 
+/**TODO: 
+*MODULARIZE getHeading function
+*Fix bug that makes bot spin in circles 
+*Tweak heading accuracy as needed
+*Integrate magnetometer code into Summer navigation code 
+**/      
+
 double getHeading(){
   
     uint32_t rawValueX = 0;
