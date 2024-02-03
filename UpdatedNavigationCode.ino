@@ -94,7 +94,7 @@ double calculateDistance(float lat1, float lon1, float lat2, float lon2); // [O]
 void printCoordinate(float coordinate, char direction);     // [X] Prints coordinate in decimal degrees
 void saveInitialPosition(float latitude, float longitude);  // [O] Saves initial position
 bool checkInsideGeofence(float lat, float lon);             // [O] Checks if a given coordinate is inside the geofence
-
+double getHeading()                                         // [O] Gets the current heading from the magnetometer
 
 //--------------------------------------------------------
 //--------------------------------------------------------
