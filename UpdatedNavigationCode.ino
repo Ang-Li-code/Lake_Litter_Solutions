@@ -108,7 +108,21 @@ void setup()
   // Magnetometer setup
   //------------------------------------------
 
+ Serial.println("MMC5983MA Magnetometer");
 
+    Wire.begin();
+
+    if (myMag.begin() == false)
+    {
+        Serial.println("MMC5983MA did not respond - check your wiring. Freezing.");
+        while (true)
+            ;
+    }
+
+    myMag.softReset();
+
+    Serial.println("MMC5983MA connected");
+}
   
   //------------------------------------------
   // GPS Set up
