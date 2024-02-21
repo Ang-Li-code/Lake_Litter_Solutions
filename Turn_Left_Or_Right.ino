@@ -96,8 +96,7 @@ double getHeading(){
 }
 
 
-//TODO: 
-//*Fix issue with half 180 degree angle detection  
+
 double calculateAngle(double latA, double lonA, double latB, double lonB) {
  
   double dy = sin(radians(lonB-lonA))  * cos(radians(latB));
