@@ -88,14 +88,14 @@ float calculateAngle(float latA, float lonA, float latB, float lonB);     // [O]
 // Must use decimal coordinates
 double calculateDistance(float lat1, float lon1, float lat2, float lon2); // [O] Function to calculate distance between two GPS coordinates using haversine formula
 // Must use decimal coordinates, returns value in meters
-
+double calculateDifference(double heading, double angleToTurn)            // [O] Function to caluclate the difference between the current heading and the angle between the current location and target location.
 // Interaction Functions
 
 void printCoordinate(float coordinate, char direction);     // [X] Prints coordinate in decimal degrees
 void saveInitialPosition(float latitude, float longitude);  // [O] Saves initial position
 bool checkInsideGeofence(float lat, float lon);             // [O] Checks if a given coordinate is inside the geofence
 double getHeading()                                         // [O] Gets the current heading from the magnetometer
-
+double turnLeftOrRight(double difference)                   // [O] Returns 1.0 (turn right), -1.0 (turn left), or 0.0 (straight) based on the difference between the heading and calculated angle
 //--------------------------------------------------------
 //--------------------------------------------------------
 // Main Functions
@@ -339,6 +339,12 @@ double calculateDistance(float lat1, float lon1, float lat2, float lon2) {
   return distance;
 }
 
+double calculateDifference(double heading, double angleToTurn){
+
+  double difference =  angleToTurn-heading;
+  return difference;
+}
+
 // Interaction Functions
 
 void printCoordinate(float coordinate, char direction) {
@@ -395,6 +401,28 @@ double getHeading(){
     // Convert to degrees
     heading /= PI;
     heading *= 180;
-
+    //heading += 10;
+    if(heading > 180){
+      heading *= -1;
+    }
+    else if(heading < -180){
+      heading *=-1;
+    }
     return heading;
+}
+
+double turnLeftOrRight(double difference){
+  double buffer = 2.5;
+  //Buffer of 2.5 degrees, further testing needed
+  if(difference > buffer || difference < -buffer){
+
+      if(difference > buffer){
+        return 1.0;
+      }
+
+      else if(difference < -buffer{
+        return -1.0;
+      }
+  }
+  return 0.0;
 }
