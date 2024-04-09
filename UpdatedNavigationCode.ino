@@ -43,8 +43,12 @@ byte rightMotor = 10;   // Right motor pin
 Servo servoL;           // Set up left motor
 Servo servoR;           // Set up right motor
 
-int moveSpeed = 100; //Speed to move at, max is 400
-
+int moveSpeed = 150;    // Speed to move at, max is 400
+int buffer = 100;       // Buffer for padding the motors
+int rightBuf = 30;      // Buffer for padding the right motor
+int leftBuf = 0;        // Buffer for padding the left motor
+int rightForward = moveSpeed+rightBuf;
+int leftForward = -(moveSpeed + leftBuf);
 //------------------------------------
 //------------------------------------
 
@@ -250,18 +254,18 @@ void loop() // Run over and over again
 
 void clockwiseMove(int time){
   //Move left motor forward and right motor backward
-  servoL.writeMicroseconds(1500 + moveSpeed);
-  servoR.writeMicroseconds(1500 - moveSpeed);
+  servoR.writeMicroseconds(1500 - rightForward);
+  servoL.writeMicroseconds(1500 + leftForward);
 
   //Time to do this for
   delay(time);
   stopMove();
 }
 
-void counterclockwiseMove(int time){
+void counterClockwiseMove(int time){
   //Move right motor forward and left motor backward
-  servoR.writeMicroseconds(1500 + moveSpeed);
-  servoL.writeMicroseconds(1500 - moveSpeed);
+  servoL.writeMicroseconds(1500 - leftForward);
+  servoR.writeMicroseconds(1500 + rightForward);
   
   //Time to do this for
   delay(time);
@@ -270,8 +274,8 @@ void counterclockwiseMove(int time){
 
 void forwardMove(int time){
   //Move the motors forward
-  servoL.writeMicroseconds(1500 + moveSpeed);
-  servoR.writeMicroseconds(1500 + moveSpeed);
+  servoL.writeMicroseconds(1500 + rightForward);
+  servoR.writeMicroseconds(1500 + leftForward);
   
   //Time to do this for
   delay(time);
@@ -280,8 +284,8 @@ void forwardMove(int time){
 
 void backwardMove(int time){
   //Move the motors backward
-  servoL.writeMicroseconds(1500 - moveSpeed);
-  servoR.writeMicroseconds(1500 - moveSpeed);
+  servoL.writeMicroseconds(1500 - rightForward);
+  servoR.writeMicroseconds(1500 - leftForward);
   
   //Time to do this for
   delay(time);
