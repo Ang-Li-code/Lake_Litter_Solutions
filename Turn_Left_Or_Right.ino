@@ -1,5 +1,5 @@
 //Compute magnetic heading from the MMC5983MA
-
+//Distance from ECG to Taco Bell is a good test example
 //Required Libraries
 #include <Wire.h>
 #include <SparkFun_MMC5983MA_Arduino_Library.h> //Click here to get the library: http://librarymanager/All#SparkFun_MMC5983MA
