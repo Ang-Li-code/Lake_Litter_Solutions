@@ -1,5 +1,20 @@
 //----------------------------------
 //----------------------------------
+// Trouble Shooting Info
+//----------------------------------
+//----------------------------------
+
+// 1) Magnetometer outputting constant value regardless of directction
+/*
+      Use built in functions:
+      - myMag.performResetOperation();
+
+      This should reset the magnetometer. 
+      Check the keywords in the sparkfun libray if the syntax is off.
+*/
+
+//----------------------------------
+//----------------------------------
 // Function Conventions
 //----------------------------------
 //----------------------------------
